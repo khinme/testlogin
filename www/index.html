@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="https://smtpjs.com/v3/smtp.js"> </script>
+
+  <script src="components/loader.js"></script>
+  <script src="js/login.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+ 
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+<style>
+    .d01
+    {
+        width:270px;
+        height:40px;
+        border:solid;
+        border-color:orange;
+    }
+    .d02
+    {
+        width:270px;
+        height:40px;
+        border:solid;
+        border-color:silver;
+       
+       
+    }
+    i {
+    margin-top: 200px;
+    margin-left: -30px;
+    cursor: pointer;
+}
+    </style>
+  <script>
+    ons.ready(function() {
+      console.log("Onsen UI is ready!");
+    });
+
+    if (ons.platform.isIPhoneX()) {
+      document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+      document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+    }
+    document.addEventListener('init', function(event) {
+  var page = event.target;
+
+  if (page.id === 'page1') {
+    page.querySelector('#BT_reg').onclick = function() {
+      document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: ''}});
+    };
+  } else if (page.id === 'page2') {
+    page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+  }
+});
+
+
+function sendEmail() {
+      Email.send({
+        Host: "smtp.gmail.com",
+        Port: "587",
+        Username: "sendingcode123@gmail.com",
+        Password: "sendingcode123!@#",
+        To: 'khinme.m.h@gmail.com',
+        From: "sendmail040@gmail.com",
+        Subject: "Sending Email using javascript",
+        Body: "Well that was easy!!",
+      })
+        .then(function (message) {
+          alert("mail sent successfully")
+        });
+    }
+  </script>
+</head>
+<body>
+    <form method="POST">
+  <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+  <template id="page1.html">
+ <ons-page id="page1">  
+   
+    
+    <div>
+        <img src="img/drive.JPEG" width="500" height="333">
+    </div> 
+    <div style="text-align: center; margin-top: 30px;">  
+        <p>  
+            <input id="username" type="text" class="d01 text-input text-input--underbar" placeholder="ユーザーID" float>
+           
+        </p>  
+        <p>  
+            <input id="password" type="password" class="d01 text-input text-input--underbar" maxlength="8" placeholder="パスワード" float />
+            
+            
+        </p>  
+        <p style="margin-top: 30px;">  
+            <ons-button style="width:270px;" onclick="login()">ログイン</ons-button>  
+        </p>  
+         <p style="margin-top: 30px;">  
+            <a href="#" style="text-decoration:none;" href="register01.html">パスワードをお忘れの方はこちら</a>
+        </p>  
+         <p style="margin-top: 30px;">  
+             <!-- <a href="register01.html"> -->
+            <ons-button id="BT_reg" style="width:270px;background-color:orange;" >登録</ons-button>  
+            <!-- </a> -->
+        </p>  
+    </div>  
+</ons-page> 
+  </template>
+
+  <template id="page2.html">
+  <ons-page id="page2">
+    <ons-toolbar>
+      <div class="left"><ons-back-button></ons-back-button></div>
+      <div class="center"></div>
+    </ons-toolbar>
+
+   <div style="text-align: center; margin-top: 100px;"> 
+       <p>
+       <input id="TB_mail" type="text" class="d02 text-input text-input--underbar" placeholder="ユーザーID" float>
+       </p>
+       <p>
+           <input id="TB_pass" type="password" class="d02 text-input text-input--underbar" maxlength="8" placeholder="パスワード" float>
+       </p>
+       <p>
+           <input id="TB_conpass" type="password" class="d02 text-input text-input--underbar" maxlength="8" placeholder="パスワード再入力" float>
+       </p>
+       <p style="margin-top: 30px;">  
+            <ons-button style="width:270px;" onclick="sendEmail()">参加する</ons-button>  
+        </p>  
+   </div>
+  </ons-page>
+</template>
+    </form>
+</body>
+</html>
